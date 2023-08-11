@@ -10,6 +10,9 @@ class BlocInfoDevice extends Bloc {
   DeviceModel get deviceModelTypeProvider =>
       deviceTypeProvider.deviceInfoService.getInfo();
 
+  bool get isVirtualDevice =>
+      (deviceModelInfoPlus.deviceInfo['isPhysicalDevice'] ?? true) == false;
+
   final DeviceInfoProvider deviceInfoPlusProvider = DeviceInfoProvider(
     DeviceInfoPlusService(),
   );

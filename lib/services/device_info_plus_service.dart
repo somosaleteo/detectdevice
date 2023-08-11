@@ -21,8 +21,11 @@ class DeviceInfoPlusService extends DeviceInfoService {
 
   @override
   bool getIsModified() {
-    // TODO: odificar la logica para comprobar si esta modificado
+    // TODO: Modificar la logica para comprobar si esta modificado
     final DeviceModel deviceModel = getInfo();
+    deviceModel.deviceInfo.forEach((key, value) {
+      print(">>> $key:$value");
+    });
 
     return deviceModel.isModified;
   }

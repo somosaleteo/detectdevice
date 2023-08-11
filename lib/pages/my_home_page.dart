@@ -41,23 +41,28 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Flutter infotype: ${blocInfoDevice.deviceModelInfoPlus.nameOs}',
-            ),
-            Text(
-              'Flutter infotype: ${blocInfoDevice.deviceModelInfoPlus}',
-            ),
-            Text(
-              'Flutter infotype: ${blocInfoDevice..deviceModelInfoPlus.isModified}',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Flutter isModified: ${blocInfoDevice.deviceModelInfoPlus.isModified}',
+              ),
+              Text(
+                'Flutter isVirtual: ${blocInfoDevice.isVirtualDevice}',
+              ),
+              Text(
+                'Flutter infotype: ${blocInfoDevice.deviceModelInfoPlus.nameOs}',
+              ),
+              Text(
+                'Flutter infotype: ${blocInfoDevice.deviceModelInfoPlus.deviceInfo}',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
