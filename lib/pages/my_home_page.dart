@@ -46,13 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Flutter isModified: ${blocInfoDevice.deviceModelInfoPlus.isModified}',
+                'Flutter isModified: ${blocInfoDevice.isModified}',
               ),
               Text(
                 'Flutter isVirtual: ${blocInfoDevice.isVirtualDevice}',
               ),
               Text(
-                'Flutter infotype: ${blocInfoDevice.deviceModelInfoPlus.nameOs}',
+                'Flutter isJailbreak: ${blocInfoDevice.deviceModelInfoPlus.nameOs}',
               ),
               Text(
                 'Flutter infotype: ${blocInfoDevice.deviceModelInfoPlus.deviceInfo}',
