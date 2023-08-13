@@ -1,3 +1,5 @@
+import 'package:freerasp/freerasp.dart';
+
 import '../interfaces/interfaces.dart';
 import '../models/device_model.dart';
 import '../providers/device_info_provider.dart';
@@ -10,6 +12,8 @@ class BlocInfoDevice extends Bloc {
   bool get isVirtualDevice =>
       (deviceModelInfoPlus.deviceInfo['isPhysicalDevice'] ?? true) == false;
 
+  final Stream<Threat> streamTampering = Talsec.instance.onThreatDetected;
+
   bool get isModified {
     bool isM = false;
     if (isVirtualDevice) {
@@ -21,6 +25,8 @@ class BlocInfoDevice extends Bloc {
   Future<bool> get isJailbreak async {
     return deviceInfoPlusProvider.isJailBreak;
   }
+
+  Future<bool> get isTamperingRisk => deviceInfoPlusProvider.isTamperingRisk;
 
   final DeviceInfoProvider deviceInfoPlusProvider = DeviceInfoProvider(
     DeviceInfoPlusService(),

@@ -1,4 +1,5 @@
 import 'package:detectdevice/models/device_model.dart';
+import 'package:detectdevice/services/tampering_service.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
@@ -23,10 +24,9 @@ class DeviceInfoPlusService extends DeviceInfoService {
   @override
   Future<bool> getIsModified() async {
     final DeviceModel deviceModel = getInfo();
-    if ((deviceModel.deviceInfo['isPhysicalDevice'] ?? true) == false) {
+    if (isVirtualDevice) {
       return true;
     }
-
     return false;
   }
 
@@ -43,10 +43,17 @@ class DeviceInfoPlusService extends DeviceInfoService {
   Future<bool> get isOsModified => throw UnimplementedError();
 
   @override
-  Future<bool> get isTamperingRisk => throw UnimplementedError();
+  Future<bool> get isTamperingRisk async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    return TamperingService().tamperingRisk;
+  }
 
   @override
-  bool get isVirtualDevice => throw UnimplementedError();
+  bool get isVirtualDevice {
+    return (getInfo().deviceInfo['isPhysicalDevice'] ?? true) == false;
+  }
+
+  Stream<dynamic> get tamperingStream => TamperingService().tamperingStream;
 
   Future<void> getDeviceInfo() async {
     var deviceData = <String, dynamic>{};

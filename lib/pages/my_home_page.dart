@@ -1,5 +1,6 @@
 import 'package:detectdevice/blocs/bloc_info_device.dart';
 import 'package:flutter/material.dart';
+import 'package:freerasp/freerasp.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -51,8 +52,36 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 'Flutter isVirtual: ${blocInfoDevice.isVirtualDevice}',
               ),
-              Text(
-                'Flutter isJailbreak: ${blocInfoDevice.deviceModelInfoPlus.nameOs}',
+              FutureBuilder<bool>(
+                future: blocInfoDevice.isJailbreak,
+                builder: (context, snapshot) {
+                  if (snapshot.data != null && !snapshot.hasError) {
+                    return Text(
+                      'Flutter isJailbreak: ${snapshot.data}',
+                    );
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+              FutureBuilder<bool>(
+                future: blocInfoDevice.isTamperingRisk,
+                builder: (context, snapshot) {
+                  if (snapshot.data != null && !snapshot.hasError) {
+                    return Text(
+                      'Flutter Tampering risk: ${snapshot.data}',
+                    );
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+              StreamBuilder<Threat>(
+                builder: (context, snapshot) {
+                  final Threat? data = snapshot.data;
+                  if (data != null) {
+                    return Text(data.toString());
+                  }
+                  return const CircularProgressIndicator();
+                },
               ),
               Text(
                 'Flutter infotype: ${blocInfoDevice.deviceModelInfoPlus.deviceInfo}',
