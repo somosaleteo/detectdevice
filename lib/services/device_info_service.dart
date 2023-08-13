@@ -1,7 +1,10 @@
-import '../interfaces/interfaces.dart';
 import '../models/device_model.dart';
 
-abstract class DeviceInfoService extends Service {
+abstract class DeviceInfoService {
   DeviceModel getInfo();
-  bool getIsModified();
+  Future<bool> getIsModified();
+  bool get isVirtualDevice;
+  Future<bool> get isJailbreakDevice;
+  Future<bool> get isOsModified;
+  Future<bool> get isTamperingRisk;
 }

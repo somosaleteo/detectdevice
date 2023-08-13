@@ -18,6 +18,10 @@ class BlocInfoDevice extends Bloc {
     return isM;
   }
 
+  Future<bool> get isJailbreak async {
+    return deviceInfoPlusProvider.isJailBreak;
+  }
+
   final DeviceInfoProvider deviceInfoPlusProvider = DeviceInfoProvider(
     DeviceInfoPlusService(),
   );
